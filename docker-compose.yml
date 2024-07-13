@@ -15,4 +15,4 @@ services:
       - NODE_ENV=development
     command: npm run start:dev
     ports:
-      - "3030:3030"
+      - "8080:8080"
