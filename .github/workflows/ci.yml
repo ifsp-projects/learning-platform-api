@@ -30,10 +30,6 @@ jobs:
         run: |
           npx prisma generate
 
-      - name: Docker Build
-        run : |
-          docker build -t ci -f Dockerfile .
-
       - name: Authorization
         run: |
           echo "Your Pull Request has been authorized successfully! 🥳"
