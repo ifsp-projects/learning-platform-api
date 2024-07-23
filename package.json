@@ -14,7 +14,7 @@
                 "@types/node": "^20.14.10",
                 "@types/nodemailer": "^6.4.15",
                 "tsx": "^4.16.2",
-                "typescript": "^5.5.3"
+                "typescript": "^5.5.4"
         },
         "dependencies": {
                 "@fastify/cors": "^9.0.1",
