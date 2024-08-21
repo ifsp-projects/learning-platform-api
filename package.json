@@ -26,7 +26,7 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "@typescript-eslint/parser": "^6.19.1",
-    "dayjs": "^1.11.11",
+    "dayjs": "^1.11.13",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "eslint-config-prettier": "^9.1.0",
