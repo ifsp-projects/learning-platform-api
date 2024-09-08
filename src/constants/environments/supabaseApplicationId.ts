@@ -1,0 +1,1 @@
+export const supbaseApplicationId = process.env.SUPBASE_APLICATION_ID
