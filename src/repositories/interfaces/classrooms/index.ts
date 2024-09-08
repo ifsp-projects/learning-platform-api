@@ -1,4 +1,4 @@
-import { Classroom, Prisma } from '@prisma/client'
+import { Classroom } from '@prisma/client'
 
 import { CreateClassroomData } from '../../prisma/prisma-classroom-repository/types'
 
@@ -12,5 +12,6 @@ export interface ClassroomsRepository {
     background_image,
     teacher_owner
   }: CreateClassroomData) => Promise<Classroom>
-  getClassroomById: (id: string) => Promise<Classroom | null>
+  getClassroomById: (classroomId: string) => Promise<Classroom>
+  deleteClassroom: (classroomId: string) => Promise<void>
 }

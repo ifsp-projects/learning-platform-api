@@ -2,7 +2,7 @@ import { randomUUID } from 'crypto'
 import { prisma } from '../../../lib/prisma'
 import { CreateClassroomData } from './types'
 
-export class PrismaClassroomReposiroty {
+export class PrismaClassroomRepository {
   createClassroom = async ({
     title,
     description,
@@ -26,10 +26,18 @@ export class PrismaClassroomReposiroty {
     })
   }
 
-  getClassroomById = async (id: string) => {
+  getClassroomById = async (classroomId: string) => {
     return await prisma.classroom.findUnique({
       where: {
-        id
+        id: classroomId
+      }
+    })
+  }
+
+  deleteClassroom = async (classroomId: string) => {
+    return await prisma.classroom.delete({
+      where: {
+        id: classroomId
       }
     })
   }

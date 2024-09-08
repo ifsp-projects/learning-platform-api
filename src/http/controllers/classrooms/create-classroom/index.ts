@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { controllerError } from '../../../../utils/controllers/controller-error'
 import { createClassRoomBodySchema } from './schemas'
-import { createClassroomFactory } from '../../../../factories/create-classroom-factory'
+import { createClassroomFactory } from '../../../../factories/classrooms/create-classroom-factory'
 
 export const createClassroom = async (
   request: FastifyRequest,
@@ -29,7 +29,6 @@ export const createClassroom = async (
       teacher_owner
     })
     reply.status(200).send(response)
-    
   } catch (createClassroomErr) {
     const error = controllerError(createClassroomErr as Error)
 

@@ -1,11 +1,11 @@
-import { ClassroomsRepository } from '../../../repositories/interfaces/classrooms'
+import { PrismaClassroomRepository } from '../../../repositories/prisma/prisma-classroom-repository'
 import {
   CreateClassroomUseCasePayload,
   CreateClassroomUseCaseReturn
 } from './types'
 
 export class CreateClassroomUseCase {
-  constructor(private classroomReposirory: ClassroomsRepository) {}
+  constructor(private classroomRepository: PrismaClassroomRepository) {}
 
   execute = async ({
     title,
@@ -16,7 +16,7 @@ export class CreateClassroomUseCase {
     background_image,
     teacher_owner
   }: CreateClassroomUseCasePayload): Promise<CreateClassroomUseCaseReturn> => {
-    const classroom = await this.classroomReposirory.createClassroom({
+    const classroom = await this.classroomRepository.createClassroom({
       title,
       description,
       institutionId,
