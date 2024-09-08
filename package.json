@@ -28,7 +28,7 @@
     "@typescript-eslint/parser": "^6.19.1",
     "dayjs": "^1.11.13",
     "eslint": "^8",
-    "eslint-config-next": "14.2.6",
+    "eslint-config-next": "14.2.8",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard-with-typescript": "^43.0.1",
     "eslint-plugin-import": "^2.25.2",
