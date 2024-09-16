@@ -8,28 +8,164 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+enum MaterialType {
+  pdf
+  video
+  image
+  spreadsheet
+}
+
+enum Role {
+  admin
+  teacher
+  student
+}
+
+enum QuestionType {
+  select
+  radio
+  input
+}
+
 model User {
-  id         String   @id @default(uuid())
-  email      String   @unique
-  password   String
-  name       String
-  teacher    Boolean  @default(false)
-  created_at DateTime @default(now())
+  id                 String           @id @default(uuid())
+  email              String           @unique
+  password           String
+  firstname          String
+  lastname           String
+  bio                String
+  interests          String[]
+  profile_picture    String           @default("https://i.pinimg.com/736x/68/3d/8f/683d8f58c98a715130b1251a9d59d1b9.jpg")
+  background_picture String           @default("https://media.licdn.com/dms/image/v2/C4D12AQHMPBvE3avWzg/article-inline_image-shrink_1000_1488/article-inline_image-shrink_1000_1488/0/1616872522462?e=1731542400&v=beta&t=jJRlzIle8CmMXsc0pscycOSqVesacuG_EDpaDATg9AE")
+  address            String?
+  cellphone          String?
+  isVerified         Boolean          @default(false)
+  badges             Badge[]
+  role               Role
+  created_at         DateTime         @default(now())
+  updated_at         DateTime         @default(now())
+  ActivityResult     ActivityResult[]
 
   @@map("users")
 }
 
+model Badge {
+  id         String   @id @default(uuid())
+  slug       String
+  title      String
+  created_at DateTime @default(now())
+  User       User?    @relation(fields: [userId], references: [id])
+  userId     String?
+
+  @@map("badges")
+}
+
+model Material {
+  id          String       @id @default(uuid())
+  slug        String
+  title       String
+  description String
+  type        MaterialType
+  file        String
+  created_at  DateTime     @default(now())
+  Lecture     Lecture?     @relation(fields: [lectureId], references: [id])
+  lectureId   String?
+
+  @@map("materials")
+}
+
+model Institution {
+  id          String      @id @default(uuid())
+  owner       String
+  name        String
+  description String
+  Classroom   Classroom[]
+
+  @@map("instituitions")
+}
+
 model Classroom {
-  id               String   @id @default(uuid())
-  institutionId    String
+  id               String      @id @default(uuid())
+  institution      Institution @relation(fields: [institutionId], references: [id])
   title            String
   description      String
   picture          String
   background_image String
   subject          String
   teacher_owner    String
-  created_at       DateTime @default(now())
+  created_at       DateTime    @default(now())
   students         String[]
+  lectures         Lecture[]
+  institutionId    String
+  Activity         Activity[]
 
   @@map("classrooms")
+}
+
+model Lecture {
+  id               String       @id @default(uuid())
+  Classroom        Classroom?   @relation(fields: [classroomId], references: [id])
+  classroomId      String?
+  title            String
+  description      String
+  relatedMaterials Material[]
+  type             MaterialType
+  video            String?
+  content          String?
+  document         String?
+
+  @@map("lectures")
+}
+
+model Question {
+  id            String       @id @default(uuid())
+  ref           String
+  label         String
+  questionType  QuestionType
+  options       String[]
+  Activity      Activity?    @relation(fields: [activityId], references: [id])
+  activityId    String?
+  correctAnswer String?
+  weight        Int?         @default(0)
+  Answer        Answer[]
+
+  @@map("questions")
+}
+
+model Activity {
+  id             String           @id @default(uuid())
+  Classroom      Classroom?       @relation(fields: [classroomId], references: [id])
+  classroomId    String?
+  title          String
+  description    String
+  questions      Question[]
+  maxScore       Int
+  ActivityResult ActivityResult[]
+
+  @@map("activities")
+}
+
+model ActivityResult {
+  id         String   @id @default(uuid())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  activity   Activity @relation(fields: [activityId], references: [id])
+  activityId String
+  answers    Answer[]
+  score      Int      @default(0)
+  created_at DateTime @default(now())
+
+  @@map("activity_results")
+}
+
+model Answer {
+  id                String         @id @default(uuid())
+  question          Question       @relation(fields: [questionId], references: [id])
+  questionId        String
+  user_answer       String
+  is_correct        Boolean
+  activity_result   ActivityResult @relation(fields: [activity_resultId], references: [id])
+  activity_resultId String
+
+  @@map("answers")
 }
