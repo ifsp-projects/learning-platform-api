@@ -163,7 +163,7 @@ model Answer {
   question          Question       @relation(fields: [questionId], references: [id])
   questionId        String
   user_answer       String
-  is_correct         Boolean
+  is_correct        Boolean
   activity_result   ActivityResult @relation(fields: [activity_resultId], references: [id])
   activity_resultId String
 
