@@ -33,18 +33,18 @@ model User {
   password           String
   firstname          String
   lastname           String
-  bio                String
+  bio                String?
   interests          String[]
   profile_picture    String           @default("https://i.pinimg.com/736x/68/3d/8f/683d8f58c98a715130b1251a9d59d1b9.jpg")
   background_picture String           @default("https://media.licdn.com/dms/image/v2/C4D12AQHMPBvE3avWzg/article-inline_image-shrink_1000_1488/article-inline_image-shrink_1000_1488/0/1616872522462?e=1731542400&v=beta&t=jJRlzIle8CmMXsc0pscycOSqVesacuG_EDpaDATg9AE")
   address            String?
   cellphone          String?
-  is_verified         Boolean          @default(false)
+  is_verified        Boolean          @default(false)
   badges             Badge[]
   role               Role
   created_at         DateTime         @default(now())
   updated_at         DateTime         @default(now())
-  activity_result     ActivityResult[]
+  activity_result    ActivityResult[]
 
   @@map("users")
 }
