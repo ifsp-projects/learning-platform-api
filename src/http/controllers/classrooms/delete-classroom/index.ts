@@ -9,7 +9,7 @@ export const deleteClassroom = async (
   reply: FastifyReply
 ) => {
   try {
-    const { classroomId } = deleteClassRoomBodySchema.parse(request.body)
+    const { classroomId } = deleteClassRoomBodySchema.parse(request.params)
 
     const useCase = deleteClassroomFactory()
     const response = await useCase.execute(classroomId)

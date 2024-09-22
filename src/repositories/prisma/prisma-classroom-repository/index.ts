@@ -26,6 +26,10 @@ export class PrismaClassroomRepository {
     })
   }
 
+  getAllClassrooms = async () => {
+    return await prisma.classroom.findMany()
+  }
+
   getClassroomById = async (classroomId: string) => {
     return await prisma.classroom.findUnique({
       where: {

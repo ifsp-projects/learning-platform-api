@@ -1,7 +1,6 @@
 import { PrismaUserRepository } from "../../../repositories/prisma/prisma-user-repository"
 import { GetUserByIdUseCaseReturn } from "./types"
 
-
 export class GetUserByIdUseCase {
   constructor(private userRepository: PrismaUserRepository) {}
 

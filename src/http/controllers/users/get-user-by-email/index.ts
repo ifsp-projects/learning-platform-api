@@ -8,7 +8,7 @@ export const getUserByEmail = async (
   reply: FastifyReply
 ) => {
   try {
-    const { email } = getUserByEmailBodySchema.parse(request.body)
+    const { email } = getUserByEmailBodySchema.parse(request.params)
 
     const useCase = getUserByEmailFactory()
     const response = await useCase.execute(email)

@@ -13,5 +13,6 @@ export interface ClassroomsRepository {
     teacher_owner
   }: CreateClassroomData) => Promise<Classroom>
   getClassroomById: (classroomId: string) => Promise<Classroom>
+  getClassrooms: () => Promise<Classroom[]>
   deleteClassroom: (classroomId: string) => Promise<void>
 }

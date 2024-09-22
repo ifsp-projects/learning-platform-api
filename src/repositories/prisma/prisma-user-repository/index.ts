@@ -21,6 +21,10 @@ export class PrismaUserRepository {
     })
   }
 
+  getAllUsers = async () => {
+    return await prisma.user.findMany()
+  }
+
   getUserByEmail = async (email: string) => {
     return await prisma.user.findUnique({
       where: {

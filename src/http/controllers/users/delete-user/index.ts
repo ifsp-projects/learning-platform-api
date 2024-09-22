@@ -9,7 +9,7 @@ export const deleteUser = async (
   reply: FastifyReply
 ) => {
   try {
-    const { userId } = deleteUserBodySchema.parse(request.body)
+    const { userId } = deleteUserBodySchema.parse(request.params)
 
     const useCase = deleteUserFactory()
     const response = await useCase.execute(userId)

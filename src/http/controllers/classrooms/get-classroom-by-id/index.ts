@@ -9,7 +9,7 @@ export const getClassroomById = async (
   reply: FastifyReply
 ) => {
   try {
-    const { classroomId } = getClassRoomByIdBodySchema.parse(request.body)
+    const { classroomId } = getClassRoomByIdBodySchema.parse(request.params)
 
     const useCase = getClassroomByIdFactory()
     const response = await useCase.execute(classroomId)
